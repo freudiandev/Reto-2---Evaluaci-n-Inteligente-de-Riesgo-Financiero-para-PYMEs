@@ -1,25 +1,45 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import {
-  HomeIcon,
-  BuildingOfficeIcon,
-  DocumentTextIcon,
-  ChartBarIcon,
-  BeakerIcon,
-  Bars3Icon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
+// Iconos simples con emojis
+const IconHome = ({ className }: { className?: string }) => (
+  <span className={`inline-block ${className}`} style={{ fontSize: '1.25em' }}>🏠</span>
+);
+
+const IconBuilding = ({ className }: { className?: string }) => (
+  <span className={`inline-block ${className}`} style={{ fontSize: '1.25em' }}>🏢</span>
+);
+
+const IconDocument = ({ className }: { className?: string }) => (
+  <span className={`inline-block ${className}`} style={{ fontSize: '1.25em' }}>📄</span>
+);
+
+const IconChart = ({ className }: { className?: string }) => (
+  <span className={`inline-block ${className}`} style={{ fontSize: '1.25em' }}>📊</span>
+);
+
+const IconBeaker = ({ className }: { className?: string }) => (
+  <span className={`inline-block ${className}`} style={{ fontSize: '1.25em' }}>🧪</span>
+);
+
+const IconMenu = ({ className }: { className?: string }) => (
+  <span className={`inline-block ${className}`} style={{ fontSize: '1.25em' }}>☰</span>
+);
+
+const IconClose = ({ className }: { className?: string }) => (
+  <span className={`inline-block ${className}`} style={{ fontSize: '1.25em' }}>✕</span>
+);
+
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
-  { name: 'Empresas', href: '/companies', icon: BuildingOfficeIcon },
-  { name: 'Solicitudes', href: '/applications', icon: DocumentTextIcon },
-  { name: 'Análisis de Riesgo', href: '/risk-analysis', icon: ChartBarIcon },
-  { name: 'Simulaciones', href: '/simulations', icon: BeakerIcon },
+  { name: 'Dashboard', href: '/dashboard', icon: IconHome },
+  { name: 'Empresas', href: '/companies', icon: IconBuilding },
+  { name: 'Solicitudes', href: '/applications', icon: IconDocument },
+  { name: 'Análisis de Riesgo', href: '/risk-analysis', icon: IconChart },
+  { name: 'Simulaciones', href: '/simulations', icon: IconBeaker },
 ];
 
 function classNames(...classes: string[]) {
@@ -32,7 +52,7 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <div className="h-screen flex overflow-hidden bg-gray-100">
-      {/* Mobile sidebar */}
+      {/* Sidebar móvil */}
       <div className={`fixed inset-0 flex z-40 md:hidden ${sidebarOpen ? '' : 'hidden'}`}>
         <div className="fixed inset-0 bg-gray-600 bg-opacity-75" onClick={() => setSidebarOpen(false)} />
         <div className="relative flex-1 flex flex-col max-w-xs w-full bg-white">
@@ -42,7 +62,7 @@ export default function Layout({ children }: LayoutProps) {
               className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               onClick={() => setSidebarOpen(false)}
             >
-              <XMarkIcon className="h-6 w-6 text-white" />
+              <IconClose className="h-6 w-6 text-white" />
             </button>
           </div>
           <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
@@ -77,7 +97,7 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </div>
 
-      {/* Static sidebar for desktop */}
+      {/* Sidebar escritorio */}
       <div className="hidden md:flex md:flex-shrink-0">
         <div className="flex flex-col w-64">
           <div className="flex flex-col h-0 flex-1 border-r border-gray-200 bg-white">
@@ -114,7 +134,7 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </div>
 
-      {/* Main content */}
+      {/* Contenido principal */}
       <div className="flex flex-col w-0 flex-1 overflow-hidden">
         <div className="md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3">
           <button
@@ -122,7 +142,7 @@ export default function Layout({ children }: LayoutProps) {
             className="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
             onClick={() => setSidebarOpen(true)}
           >
-            <Bars3Icon className="h-6 w-6" />
+            <IconMenu className="h-6 w-6" />
           </button>
         </div>
         <main className="flex-1 relative z-0 overflow-y-auto focus:outline-none">

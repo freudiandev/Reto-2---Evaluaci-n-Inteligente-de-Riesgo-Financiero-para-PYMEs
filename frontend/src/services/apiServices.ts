@@ -1,20 +1,20 @@
-import api from './api';
 import type {
-  Company,
-  CompanyCreate,
-  CreditApplication,
-  CreditApplicationCreate,
-  FinancialStatement,
-  SocialMediaAnalysis,
-  SocialMediaAnalysisRequest,
-  RiskScore,
-  SimulationScenario,
-  SimulationRequest,
-  DashboardData,
-  RiskAnalysisReport,
+    Company,
+    CompanyCreate,
+    CreditApplication,
+    CreditApplicationCreate,
+    DashboardData,
+    FinancialStatement,
+    RiskAnalysisReport,
+    RiskScore,
+    SimulationRequest,
+    SimulationScenario,
+    SocialMediaAnalysis,
+    SocialMediaAnalysisRequest,
 } from '../types';
+import api from './api';
 
-// Companies API
+// Servicios para manejar empresas
 export const companiesApi = {
   getAll: async (skip = 0, limit = 100) => {
     const response = await api.get(`/companies/?skip=${skip}&limit=${limit}`);
@@ -46,7 +46,7 @@ export const companiesApi = {
   },
 };
 
-// Credit Applications API
+// Solicitudes de crédito
 export const applicationsApi = {
   getAll: async (skip = 0, limit = 100): Promise<CreditApplication[]> => {
     const response = await api.get(`/applications/?skip=${skip}&limit=${limit}`);
@@ -69,7 +69,7 @@ export const applicationsApi = {
   },
 };
 
-// Financial Statements API
+// Estados financieros
 export const financialStatementsApi = {
   uploadFile: async (
     companyId: number,
@@ -102,7 +102,7 @@ export const financialStatementsApi = {
   },
 };
 
-// Social Media Analysis API
+// Análisis de redes sociales
 export const socialMediaApi = {
   analyze: async (request: SocialMediaAnalysisRequest) => {
     const response = await api.post('/social-media/analyze', request);
@@ -115,7 +115,7 @@ export const socialMediaApi = {
   },
 };
 
-// Risk Score API
+// Cálculo de riesgo
 export const riskScoreApi = {
   calculate: async (applicationId: number) => {
     const response = await api.post(`/risk-score/calculate/${applicationId}`);
@@ -128,7 +128,7 @@ export const riskScoreApi = {
   },
 };
 
-// Simulations API
+// Simulaciones de escenarios
 export const simulationsApi = {
   create: async (simulation: SimulationRequest): Promise<SimulationScenario> => {
     const response = await api.post('/simulations/', simulation);
@@ -141,7 +141,7 @@ export const simulationsApi = {
   },
 };
 
-// Dashboard API
+// Datos del dashboard
 export const dashboardApi = {
   getSummary: async (): Promise<DashboardData> => {
     const response = await api.get('/dashboard/summary');
@@ -149,7 +149,7 @@ export const dashboardApi = {
   },
 };
 
-// Reports API
+// Reportes y exportaciones
 export const reportsApi = {
   getRiskAnalysis: async (applicationId: number): Promise<RiskAnalysisReport> => {
     const response = await api.get(`/reports/risk-analysis/${applicationId}`);
@@ -164,7 +164,7 @@ export const reportsApi = {
   },
 };
 
-// Health Check
+// Estado del servidor
 export const healthApi = {
   check: async () => {
     const response = await api.get('/health');

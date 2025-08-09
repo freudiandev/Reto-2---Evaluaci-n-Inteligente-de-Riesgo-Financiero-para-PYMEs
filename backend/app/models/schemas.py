@@ -21,7 +21,7 @@ class SocialMediaPlatform(str, Enum):
     TWITTER = "twitter"
     TIKTOK = "tiktok"
 
-# Modelos de solicitud (Request)
+# Datos para crear empresas
 class CompanyCreate(BaseModel):
     ruc: str
     name: str
@@ -42,6 +42,7 @@ class CompanyCreate(BaseModel):
             raise ValueError('El RUC debe contener solo números')
         return v
 
+# Datos para solicitudes de crédito
 class CreditApplicationCreate(BaseModel):
     company_id: int
     requested_amount: float
@@ -60,6 +61,7 @@ class CreditApplicationCreate(BaseModel):
             raise ValueError('El plazo debe estar entre 1 y 360 meses')
         return v
 
+# Estados financieros
 class FinancialStatementCreate(BaseModel):
     company_id: int
     application_id: int
@@ -77,13 +79,14 @@ class FinancialStatementCreate(BaseModel):
     investing_cash_flow: float = 0
     financing_cash_flow: float = 0
 
+# Análisis de redes sociales
 class SocialMediaAnalysisRequest(BaseModel):
     company_id: int
     application_id: int
     platform: SocialMediaPlatform
     url: str
 
-# Modelos de respuesta (Response)
+# Respuestas de la API
 class CompanyResponse(BaseModel):
     id: int
     ruc: str
@@ -174,6 +177,7 @@ class SimulationRequest(BaseModel):
     social_media_improvement: bool = False
     payment_history_improvement: bool = False
 
+# Respuesta de simulaciones
 class SimulationResponse(BaseModel):
     id: int
     scenario_name: str
@@ -190,7 +194,7 @@ class SimulationResponse(BaseModel):
     class Config:
         from_attributes = True
 
-# Modelos de análisis y dashboard
+# Modelos para reportes
 class FinancialRatios(BaseModel):
     liquidity_ratio: float
     debt_to_equity: float

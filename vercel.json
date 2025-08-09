@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "name": "pymes-risk-frontend",
+  "builds": [
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "VITE_API_URL": "https://backend-riesgo-pymes-the-orellanas-boyz.onrender.com/api/v1",
+    "VITE_BACKEND_URL": "https://backend-riesgo-pymes-the-orellanas-boyz.onrender.com"
+  }
+}

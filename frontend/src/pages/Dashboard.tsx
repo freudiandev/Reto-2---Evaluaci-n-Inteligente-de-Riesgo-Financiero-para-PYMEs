@@ -1,16 +1,30 @@
-import { useState, useEffect } from 'react';
-import { 
-  ChartBarIcon, 
-  UserGroupIcon, 
-  DocumentCheckIcon,
-  ExclamationTriangleIcon,
-  CurrencyDollarIcon 
-} from '@heroicons/react/24/outline';
-import { dashboardApi } from '../services/apiServices';
-import { DashboardData } from '../types';
-import StatsCard from '../components/StatsCard';
+import { useEffect, useState } from 'react';
 import RiskLevelChart from '../components/RiskLevelChart';
 import SectorChart from '../components/SectorChart';
+import StatsCard from '../components/StatsCard';
+import { dashboardApi } from '../services/apiServices';
+import { DashboardData } from '../types';
+
+// Iconos para el dashboard
+const IconChart = ({ className }: { className?: string }) => (
+  <span className={`inline-block ${className}`} style={{ fontSize: '1.5em' }}>📊</span>
+);
+
+const IconGroup = ({ className }: { className?: string }) => (
+  <span className={`inline-block ${className}`} style={{ fontSize: '1.5em' }}>👥</span>
+);
+
+const IconDocument = ({ className }: { className?: string }) => (
+  <span className={`inline-block ${className}`} style={{ fontSize: '1.5em' }}>📋</span>
+);
+
+const IconWarning = ({ className }: { className?: string }) => (
+  <span className={`inline-block ${className}`} style={{ fontSize: '1.5em' }}>⚠️</span>
+);
+
+const IconDollar = ({ className }: { className?: string }) => (
+  <span className={`inline-block ${className}`} style={{ fontSize: '1.5em' }}>💰</span>
+);
 
 export default function Dashboard() {
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
@@ -43,7 +57,7 @@ export default function Dashboard() {
   if (!dashboardData) {
     return (
       <div className="text-center py-12">
-        <ExclamationTriangleIcon className="mx-auto h-12 w-12 text-gray-400" />
+        <IconWarning className="mx-auto h-12 w-12 text-gray-400" />
         <h3 className="mt-2 text-sm font-medium text-gray-900">No se pudieron cargar los datos</h3>
         <p className="mt-1 text-sm text-gray-500">
           Intenta recargar la página o contacta al administrador.
@@ -65,35 +79,35 @@ export default function Dashboard() {
         </p>
       </div>
 
-      {/* Stats Cards */}
+      {/* Tarjetas de estadísticas */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8">
         <StatsCard
           title="Total Solicitudes"
           value={dashboardData.total_applications.toString()}
-          icon={DocumentCheckIcon}
+          icon={IconDocument}
           color="blue"
         />
         <StatsCard
           title="Tasa de Aprobación"
           value={`${approvalRate}%`}
-          icon={ChartBarIcon}
+          icon={IconChart}
           color="green"
         />
         <StatsCard
           title="Score Promedio"
           value={dashboardData.average_risk_score.toFixed(1)}
-          icon={UserGroupIcon}
+          icon={IconGroup}
           color="yellow"
         />
         <StatsCard
           title="Crédito Total"
           value={`$${(dashboardData.total_credit_amount / 1000000).toFixed(1)}M`}
-          icon={CurrencyDollarIcon}
+          icon={IconDollar}
           color="purple"
         />
       </div>
 
-      {/* Application Status */}
+      {/* Estado de solicitudes */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         <div className="card">
           <h3 className="text-lg font-medium text-gray-900 mb-4">Estado de Solicitudes</h3>
@@ -130,7 +144,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Recent Activity */}
+      {/* Actividad reciente */}
       <div className="card">
         <h3 className="text-lg font-medium text-gray-900 mb-4">Actividad Reciente</h3>
         <div className="text-sm text-gray-500">

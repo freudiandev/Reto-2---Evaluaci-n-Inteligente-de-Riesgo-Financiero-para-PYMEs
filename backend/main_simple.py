@@ -4,10 +4,8 @@ from fastapi.responses import JSONResponse
 import os
 from dotenv import load_dotenv
 
-# Cargar variables de entorno
 load_dotenv()
 
-# Crear la aplicación FastAPI
 app = FastAPI(
     title="PyMEs Risk Assessment API",
     description="Sistema de evaluación de riesgo financiero para PYMEs",
@@ -16,7 +14,7 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
-# Configurar CORS
+# CORS para permitir conexiones del frontend
 origins = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:5173").split(",")
 
 app.add_middleware(
@@ -27,7 +25,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Ruta de salud
+# Verificar estado de la API
 @app.get("/api/v1/health")
 async def health():
     return {
@@ -36,7 +34,7 @@ async def health():
         "version": "1.0.0"
     }
 
-# Ruta de prueba para empresas
+# Obtener lista de empresas
 @app.get("/api/v1/companies/")
 async def list_companies():
     return {
@@ -58,7 +56,7 @@ async def list_companies():
         ]
     }
 
-# Ruta de prueba para dashboard
+# Datos para el dashboard
 @app.get("/api/v1/dashboard/summary")
 async def dashboard_summary():
     return {
