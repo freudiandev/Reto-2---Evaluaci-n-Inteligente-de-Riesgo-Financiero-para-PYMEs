@@ -1,0 +1,21 @@
+# 🔧 VARIABLES PARA RAILWAY - COPIAR Y PEGAR
+
+# Variables principales
+PORT=8000
+DATABASE_URL=sqlite:///./database/app.db
+SECRET_KEY=EkJa9SGw5qSByKzz9cpwMqe^NA0xt1HusErA*YGpX$y%Igj%loqO1cTKttvFeqST
+ENVIRONMENT=production
+DEBUG=false
+
+# API Configuration
+API_V1_STR=/api/v1
+PROJECT_NAME=PyMEs Risk Assessment
+
+# CORS - ACTUALIZAR DESPUÉS CON URL DE VERCEL
+CORS_ORIGINS=https://localhost:3000
+
+# 📝 INSTRUCCIONES:
+# 1. Copia las variables de arriba
+# 2. Ve a Railway → Variables → Add Variable
+# 3. Pega cada variable (una por línea)
+# 4. Después del deploy, actualiza CORS_ORIGINS con la URL de Vercel
