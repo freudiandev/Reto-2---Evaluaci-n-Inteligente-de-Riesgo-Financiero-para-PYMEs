@@ -1,0 +1,38 @@
+{
+    "python.defaultInterpreterPath": "./backend/venv/Scripts/python.exe",
+    "python.terminal.activateEnvironment": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.formatting.provider": "black",
+    "liveServer.settings.port": 5173,
+    "liveServer.settings.root": "/frontend/dist",
+    "liveServer.settings.CustomBrowser": "chrome",
+    "rest-client.environmentVariables": {
+        "local": {
+            "baseUrl": "http://localhost:8000",
+            "apiUrl": "http://localhost:8000/api/v1"
+        },
+        "docker": {
+            "baseUrl": "http://localhost",
+            "apiUrl": "http://localhost/api/v1"
+        }
+    },
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact",
+        "typescript": "typescriptreact"
+    },
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    "files.associations": {
+        "*.env": "properties"
+    },
+    "sqltools.connections": [
+        {
+            "name": "PyMEs SQLite",
+            "driver": "SQLite",
+            "database": "./backend/database/pymes_risk.db"
+        }
+    ]
+}
