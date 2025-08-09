@@ -1,0 +1,57 @@
+# Framework web
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+
+# Base de datos y ORM
+sqlalchemy==2.0.23
+sqlite3
+
+# Modelos de IA y ML
+scikit-learn==1.3.2
+pandas==2.1.3
+numpy==1.25.2
+joblib==1.3.2
+
+# Procesamiento de lenguaje natural
+nltk==3.8.1
+textblob==0.17.1
+spacy==3.7.2
+
+# Web scraping y requests
+requests==2.31.0
+beautifulsoup4==4.12.2
+selenium==4.15.2
+
+# Análisis de sentimientos y texto
+vaderSentiment==3.3.2
+
+# Manejo de archivos
+openpyxl==3.1.2
+python-docx==0.8.11
+PyPDF2==3.0.1
+
+# Validación y serialización
+pydantic==2.5.0
+
+# CORS y middleware
+python-cors==1.7.0
+
+# Utilidades
+python-dotenv==1.0.0
+httpx==0.25.2
+
+# Fecha y tiempo
+python-dateutil==2.8.2
+
+# Gráficos y visualizaciones (para el backend)
+matplotlib==3.8.2
+seaborn==0.13.0
+plotly==5.17.0
+
+# Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+
+# Logging
+loguru==0.7.2
