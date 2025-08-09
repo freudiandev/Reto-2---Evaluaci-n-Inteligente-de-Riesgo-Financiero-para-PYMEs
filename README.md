@@ -347,4 +347,238 @@ Desarrollado como solución completa para el Reto 2 de Viamatica - Evaluación I
 ---
 
 **¡Democratizando el acceso al crédito a través de la inteligencia artificial! 🚀**Reto-2---Evaluaci-n-Inteligente-de-Riesgo-Financiero-para-PYMEs
-Reto 2 - Evaluación Inteligente de Riesgo Financiero para PYMEs
+# 🏦 PyMEs Risk Assessment - Sistema de Evaluación de Riesgo Financiero
+
+> **Sistema inteligente de evaluación de riesgo financiero para Pequeñas y Medianas Empresas (PYMEs) en Ecuador**
+
+## 📋 Descripción
+
+Sistema completo de evaluación de riesgo financiero que utiliza inteligencia artificial y análisis de datos para determinar la viabilidad crediticia de PYMEs ecuatorianas. Incluye análisis de estados financieros, verificación de información pública, y generación de reportes automáticos.
+
+## 🚀 Características Principales
+
+### 📊 **Análisis Financiero Avanzado**
+- Evaluación automatizada de estados financieros
+- Cálculo de ratios financieros clave
+- Análisis de tendencias históricas
+- Predicción de solvencia
+
+### 🤖 **Inteligencia Artificial**
+- Modelos de Machine Learning para predicción de riesgo
+- Análisis de sentimientos en noticias y redes sociales
+- Procesamiento de lenguaje natural para documentos
+- Detección de anomalías en patrones financieros
+
+### 🌐 **Verificación de Datos Públicos**
+- Integración con SRI (Servicio de Rentas Internas)
+- Consulta de información de superintendencias
+- Verificación de antecedentes crediticios
+- Análisis de noticias y menciones públicas
+
+### 📱 **Interfaz de Usuario Moderna**
+- Dashboard interactivo con métricas en tiempo real
+- Visualizaciones avanzadas con gráficos dinámicos
+- Interfaz responsive para móviles y escritorio
+- Sistema de notificaciones y alertas
+
+## 🛠 Tecnologías
+
+### **Backend**
+- **FastAPI**: Framework web moderno y rápido
+- **Python 3.11+**: Lenguaje de programación principal
+- **SQLAlchemy**: ORM para base de datos
+- **Scikit-learn**: Machine Learning y análisis predictivo
+- **Pandas & NumPy**: Análisis y manipulación de datos
+- **NLTK & SpaCy**: Procesamiento de lenguaje natural
+- **Selenium**: Web scraping automatizado
+- **SQLite/PostgreSQL**: Base de datos
+
+### **Frontend**
+- **React 18**: Biblioteca de interfaz de usuario
+- **TypeScript**: Tipado estático para JavaScript
+- **Vite**: Build tool rápido y moderno
+- **Tailwind CSS**: Framework de estilos utilitarios
+- **Chart.js**: Visualización de datos y gráficos
+
+### **DevOps & Deployment**
+- **Docker**: Contenedorización
+- **Docker Compose**: Orquestación de contenedores
+- **Railway/Vercel**: Plataformas de deployment gratuitas
+- **GitHub Actions**: CI/CD automatizado
+
+## 🚀 Deployment (¡GRATIS!)
+
+### **Opción 1: Railway + Vercel (Recomendado)**
+
+#### Backend en Railway:
+1. Ve a [Railway.app](https://railway.app) y conéctate con GitHub
+2. Selecciona este repositorio
+3. Railway detectará automáticamente el `Dockerfile`
+4. Configura las variables de entorno (ver `.env.production`)
+
+#### Frontend en Vercel:
+1. Ve a [Vercel.com](https://vercel.com) e importa el repositorio
+2. Configuración:
+   - Framework: `Vite`
+   - Root Directory: `frontend`
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+
+### **Opción 2: Deployment Local con Docker**
+
+```bash
+# Windows
+.\deploy-local.bat
+
+# Linux/Mac
+chmod +x deploy-local.sh
+./deploy-local.sh
+```
+
+### **Opción 3: Desarrollo Local**
+
+```bash
+# 1. Backend
+cd backend
+python -m venv .venv
+.venv\Scripts\activate  # Windows
+source .venv/bin/activate  # Linux/Mac
+pip install -r requirements.txt
+python main_simple.py
+
+# 2. Frontend (nueva terminal)
+cd frontend
+npm install
+npm run dev
+```
+
+## 📖 Documentación de API
+
+Una vez ejecutándose, la documentación interactiva está disponible en:
+- **Swagger UI**: `http://localhost:8000/docs`
+- **ReDoc**: `http://localhost:8000/redoc`
+
+## 🏗 Estructura del Proyecto
+
+```
+├── backend/                 # API Backend FastAPI
+│   ├── models/             # Modelos de base de datos
+│   ├── services/           # Lógica de negocio
+│   ├── routers/            # Endpoints de API
+│   ├── core/               # Configuración y utilidades
+│   ├── main.py             # Aplicación principal
+│   ├── main_simple.py      # Versión simplificada para testing
+│   └── requirements.txt    # Dependencias Python
+├── frontend/               # Interfaz de usuario React
+│   ├── src/
+│   │   ├── components/     # Componentes React
+│   │   ├── pages/          # Páginas de la aplicación
+│   │   ├── services/       # Servicios de API
+│   │   └── utils/          # Utilidades
+│   ├── package.json        # Dependencias Node.js
+│   └── Dockerfile          # Contenedor del frontend
+├── infra/                  # Infraestructura como código
+├── docker-compose.prod.yml # Configuración Docker producción
+├── Dockerfile              # Contenedor del backend
+└── DEPLOYMENT_GUIDE.md     # Guía completa de deployment
+```
+
+## 🔧 Variables de Entorno
+
+### Backend (.env)
+```bash
+DATABASE_URL=sqlite:///./database/app.db
+SECRET_KEY=your-secret-key-here
+CORS_ORIGINS=http://localhost:3000,http://localhost:80
+ENVIRONMENT=development
+API_V1_STR=/api/v1
+PROJECT_NAME=PyMEs Risk Assessment
+```
+
+### Frontend (.env)
+```bash
+VITE_API_URL=http://localhost:8000/api/v1
+VITE_BACKEND_URL=http://localhost:8000
+NODE_ENV=development
+```
+
+## 📊 Endpoints Principales
+
+### 🏥 **Health Check**
+- `GET /api/v1/health` - Estado del sistema
+
+### 🏢 **Empresas**
+- `GET /api/v1/companies/` - Listar empresas
+- `POST /api/v1/companies/` - Crear empresa
+- `GET /api/v1/companies/{id}` - Obtener empresa
+- `PUT /api/v1/companies/{id}` - Actualizar empresa
+
+### 📈 **Evaluaciones**
+- `POST /api/v1/evaluations/` - Crear evaluación
+- `GET /api/v1/evaluations/{id}` - Obtener evaluación
+- `GET /api/v1/evaluations/company/{company_id}` - Evaluaciones por empresa
+
+### 📊 **Dashboard**
+- `GET /api/v1/dashboard/summary` - Resumen del dashboard
+- `GET /api/v1/dashboard/metrics` - Métricas principales
+
+## 💰 Costos de Deployment
+
+| Plataforma | Costo | Límites |
+|------------|-------|---------|
+| **Railway** | $5/mes crédito gratis | 500 horas/mes |
+| **Vercel** | Gratis | Proyectos ilimitados |
+| **Render** | Gratis | 750 horas/mes |
+| **Supabase** | Gratis | 500MB base de datos |
+
+## 🚨 Troubleshooting
+
+### Error de CORS
+```bash
+# Actualizar CORS_ORIGINS en backend/.env
+CORS_ORIGINS=https://tu-frontend.vercel.app
+```
+
+### Error de Base de Datos
+```bash
+# Crear directorios necesarios
+mkdir -p backend/database backend/uploads backend/logs
+```
+
+### Frontend no conecta
+```bash
+# Verificar variables en frontend/.env
+VITE_API_URL=https://tu-backend.railway.app/api/v1
+```
+
+## 🤝 Contribución
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## 📞 Soporte
+
+- 📧 **Email**: soporte@pymesrisk.com
+- 💬 **Issues**: [GitHub Issues](https://github.com/tu-usuario/pymes-risk/issues)
+- 📖 **Documentación**: [Deployment Guide](./DEPLOYMENT_GUIDE.md)
+
+## 📄 Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para detalles.
+
+---
+
+<div align="center">
+
+**🏦 PyMEs Risk Assessment - Evaluación Inteligente de Riesgo Financiero**
+
+[![Deployment](https://img.shields.io/badge/Deploy-Railway-purple)](https://railway.app)
+[![Frontend](https://img.shields.io/badge/Deploy-Vercel-black)](https://vercel.com)
+[![Python](https://img.shields.io/badge/Python-3.11+-blue)](https://python.org)
+[![React](https://img.shields.io/badge/React-18-61dafb)](https://reactjs.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Latest-009688)](https://fastapi.tiangolo.com)
+
+</div>

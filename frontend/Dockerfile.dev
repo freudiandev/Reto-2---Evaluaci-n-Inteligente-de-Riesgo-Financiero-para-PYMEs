@@ -1,0 +1,23 @@
+# Dockerfile para desarrollo del Frontend
+FROM node:18-alpine
+
+# Instalar dependencias globales
+RUN npm install -g npm@latest
+
+# Crear directorio de trabajo
+WORKDIR /app
+
+# Copiar package files
+COPY package*.json ./
+
+# Instalar dependencias
+RUN npm install
+
+# Copiar código fuente
+COPY . .
+
+# Exponer puertos
+EXPOSE 3000 5173
+
+# Comando de desarrollo
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
