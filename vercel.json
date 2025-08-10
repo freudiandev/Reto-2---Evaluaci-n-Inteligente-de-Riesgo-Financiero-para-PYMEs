@@ -6,7 +6,9 @@
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "distDir": "dist",
+        "installCommand": "npm ci",
+        "buildCommand": "npm run build"
       }
     }
   ],
@@ -16,7 +18,13 @@
       "dest": "/index.html"
     }
   ],
+  "functions": {
+    "frontend/src/**": {
+      "runtime": "nodejs18.x"
+    }
+  },
   "env": {
+    "NODE_VERSION": "18.18.0",
     "VITE_API_URL": "https://backend-riesgo-pymes-the-orellanas-boyz.onrender.com/api/v1",
     "VITE_BACKEND_URL": "https://backend-riesgo-pymes-the-orellanas-boyz.onrender.com"
   }
