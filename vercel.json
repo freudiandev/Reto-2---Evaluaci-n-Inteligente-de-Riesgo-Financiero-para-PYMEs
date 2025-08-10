@@ -1,25 +1,6 @@
 {
-  "version": 2,
-  "name": "pymes-risk-frontend",
-  "builds": [
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist",
-        "buildCommand": "npm run build"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ],
-  "env": {
-    "NODE_VERSION": "18.18.0",
-    "VITE_API_URL": "https://backend-riesgo-pymes-the-orellanas-boyz.onrender.com/api/v1",
-    "VITE_BACKEND_URL": "https://backend-riesgo-pymes-the-orellanas-boyz.onrender.com"
-  }
+  "buildCommand": "cd frontend && npm run build",
+  "outputDirectory": "frontend/dist",
+  "devCommand": "cd frontend && npm run dev",
+  "installCommand": "cd frontend && npm install"
 }
