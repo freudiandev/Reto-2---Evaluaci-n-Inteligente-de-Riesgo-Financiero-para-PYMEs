@@ -85,12 +85,13 @@ async def list_companies():
 @app.get("/api/v1/dashboard/summary")
 async def dashboard_summary():
     return {
-        "total_companies": 25,
         "total_applications": 48,
         "approved_applications": 32,
-        "rejected_applications": 16,
+        "rejected_applications": 10,
+        "pending_applications": 6,  # Agregado
         "average_risk_score": 68.5,
-        "risk_distribution": {
+        "total_credit_amount": 2500000,  # Agregado - 2.5M total
+        "risk_level_distribution": {  # Cambiado de risk_distribution
             "low": 15,
             "medium": 20, 
             "high": 13
