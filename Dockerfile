@@ -36,4 +36,4 @@ ENV PORT=8000
 ENV PYTHONUNBUFFERED=1
 
 # Comando para ejecutar la aplicación
-CMD ["python", "main_production.py"]
+CMD ["python", "main_simple_fixed.py"]
