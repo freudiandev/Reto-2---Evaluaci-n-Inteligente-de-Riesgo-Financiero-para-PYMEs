@@ -18,11 +18,6 @@
       "dest": "/index.html"
     }
   ],
-  "functions": {
-    "frontend/src/**": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "env": {
     "NODE_VERSION": "18.18.0",
     "VITE_API_URL": "https://backend-riesgo-pymes-the-orellanas-boyz.onrender.com/api/v1",
