@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import CyberpunkNav from './components/CyberpunkNav';
 import VaporwaveLayout from './components/VaporwaveLayout';
 import Applications from './pages/Applications';
 import Companies from './pages/Companies';
@@ -11,6 +12,9 @@ function App() {
   return (
     <div className="cyberpunk-app">
       <VaporwaveLayout>
+        {/* Navegación cyberpunk */}
+        <CyberpunkNav />
+        
         <header className="hero-section">
           <div className="cyberpunk-grid-bg"></div>
           <h1 className="neon-title">
@@ -51,6 +55,13 @@ function App() {
           </section>
           <div className="footer-grid"></div>
         </footer>
+        
+        {/* Efectos ambientales */}
+        <div className="ambient-lights">
+          <div className="light pink"></div>
+          <div className="light blue"></div>
+          <div className="light purple"></div>
+        </div>
       </VaporwaveLayout>
     </div>
   );

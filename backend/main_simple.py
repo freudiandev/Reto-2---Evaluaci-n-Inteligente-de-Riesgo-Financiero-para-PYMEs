@@ -15,15 +15,40 @@ app = FastAPI(
 )
 
 # CORS para permitir conexiones del frontend
-origins = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:5173").split(",")
+origins = [
+    "http://localhost:3000",
+    "http://localhost:5173", 
+    "https://localhost:3000",
+    "https://localhost:5173",
+    "*"  # Para deployment en producción
+]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],  # Permitir todos los orígenes para deployment
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Endpoint raíz
+@app.get("/")
+async def root():
+    return {
+        "message": "PyMEs Risk Assessment API - The Orellana's Boyz",
+        "status": "running",
+        "version": "1.0.0",
+        "docs": "/docs",
+        "health": "/health"
+    }
+
+# Health check simple
+@app.get("/health")
+async def simple_health():
+    return {
+        "status": "healthy",
+        "message": "API funcionando correctamente"
+    }
 
 # Verificar estado de la API
 @app.get("/api/v1/health")
@@ -76,6 +101,82 @@ async def dashboard_summary():
             "Manufactura": 15,
             "Servicios": 13
         }
+    }
+
+# Obtener lista de aplicaciones
+@app.get("/api/v1/applications/")
+async def list_applications():
+    return {
+        "applications": [
+            {
+                "id": 1,
+                "company_name": "TechStart S.A.",
+                "amount": 50000,
+                "status": "pending",
+                "risk_score": 75,
+                "created_date": "2024-01-15"
+            },
+            {
+                "id": 2,
+                "company_name": "Comercial Los Andes",
+                "amount": 25000,
+                "status": "approved",
+                "risk_score": 85,
+                "created_date": "2024-01-10"
+            },
+            {
+                "id": 3,
+                "company_name": "Servicios Express",
+                "amount": 75000,
+                "status": "rejected",
+                "risk_score": 45,
+                "created_date": "2024-01-08"
+            }
+        ]
+    }
+
+# Análisis de riesgo específico
+@app.get("/api/v1/risk-analysis/{application_id}")
+async def get_risk_analysis(application_id: int):
+    return {
+        "application_id": application_id,
+        "risk_score": 72,
+        "risk_level": "medium",
+        "factors": {
+            "financial_health": 80,
+            "payment_history": 65,
+            "market_sentiment": 70,
+            "sector_risk": 60
+        },
+        "recommendation": "Aprobado con condiciones especiales",
+        "analysis_date": "2024-01-15T10:30:00Z"
+    }
+
+# Simulaciones
+@app.get("/api/v1/simulations/{application_id}")
+async def get_simulations(application_id: int):
+    return {
+        "application_id": application_id,
+        "scenarios": [
+            {
+                "name": "Optimista",
+                "probability": 0.3,
+                "risk_score": 85,
+                "recommendation": "Aprobado"
+            },
+            {
+                "name": "Conservador",
+                "probability": 0.5,
+                "risk_score": 72,
+                "recommendation": "Aprobado con condiciones"
+            },
+            {
+                "name": "Pesimista",
+                "probability": 0.2,
+                "risk_score": 45,
+                "recommendation": "Rechazado"
+            }
+        ]
     }
 
 if __name__ == "__main__":
