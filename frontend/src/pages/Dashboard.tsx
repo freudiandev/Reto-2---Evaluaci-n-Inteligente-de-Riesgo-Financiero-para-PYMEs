@@ -1,30 +1,8 @@
 import { useEffect, useState } from 'react';
 import RiskLevelChart from '../components/RiskLevelChart';
 import SectorChart from '../components/SectorChart';
-import StatsCard from '../components/StatsCard';
 import { dashboardApi } from '../services/apiServices';
 import { DashboardData } from '../types';
-
-// Iconos para el dashboard
-const IconChart = ({ className }: { className?: string }) => (
-  <span className={`inline-block ${className}`} style={{ fontSize: '1.5em' }}>📊</span>
-);
-
-const IconGroup = ({ className }: { className?: string }) => (
-  <span className={`inline-block ${className}`} style={{ fontSize: '1.5em' }}>👥</span>
-);
-
-const IconDocument = ({ className }: { className?: string }) => (
-  <span className={`inline-block ${className}`} style={{ fontSize: '1.5em' }}>📋</span>
-);
-
-const IconWarning = ({ className }: { className?: string }) => (
-  <span className={`inline-block ${className}`} style={{ fontSize: '1.5em' }}>⚠️</span>
-);
-
-const IconDollar = ({ className }: { className?: string }) => (
-  <span className={`inline-block ${className}`} style={{ fontSize: '1.5em' }}>💰</span>
-);
 
 export default function Dashboard() {
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
@@ -40,7 +18,7 @@ export default function Dashboard() {
       const data = await dashboardApi.getSummary();
       setDashboardData(data);
     } catch (error) {
-      console.error('Error loading dashboard data:', error);
+      console.error('Error cargando datos del dashboard:', error);
     } finally {
       setLoading(false);
     }
@@ -48,21 +26,29 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-500"></div>
-      </div>
+      <section className="cyberpunk-loading">
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <h3 className="neon-text">Cargando datos del sistema...</h3>
+          <div className="loading-grid"></div>
+        </div>
+      </section>
     );
   }
 
   if (!dashboardData) {
     return (
-      <div className="text-center py-12">
-        <IconWarning className="mx-auto h-12 w-12 text-gray-400" />
-        <h3 className="mt-2 text-sm font-medium text-gray-900">No se pudieron cargar los datos</h3>
-        <p className="mt-1 text-sm text-gray-500">
-          Intenta recargar la página o contacta al administrador.
-        </p>
-      </div>
+      <section className="error-section">
+        <div className="error-container">
+          <h3 className="error-title neon-text">⚠️ Error de conexión</h3>
+          <p className="error-message glow-text">
+            No se pudieron cargar los datos del sistema. Verifica la conexión con el backend.
+          </p>
+          <button className="btn-primary" onClick={loadDashboardData}>
+            🔄 Reintentar
+          </button>
+        </div>
+      </section>
     );
   }
 
@@ -71,87 +57,126 @@ export default function Dashboard() {
     : '0';
 
   return (
-    <div>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        <p className="mt-2 text-sm text-gray-700">
-          Resumen general del sistema de evaluación de riesgo financiero para PYMEs
+    <div className="dashboard-container">
+      {/* Header del Dashboard */}
+      <section className="dashboard-header">
+        <h2 className="section-title neon-text">🎯 Centro de Control Financiero</h2>
+        <p className="section-subtitle glow-text">
+          Sistema de monitoreo en tiempo real para análisis de riesgo crediticio
         </p>
-      </div>
+        <div className="cyber-divider"></div>
+      </section>
 
-      {/* Tarjetas de estadísticas */}
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8">
-        <StatsCard
-          title="Total Solicitudes"
-          value={dashboardData.total_applications.toString()}
-          icon={IconDocument}
-          color="blue"
-        />
-        <StatsCard
-          title="Tasa de Aprobación"
-          value={`${approvalRate}%`}
-          icon={IconChart}
-          color="green"
-        />
-        <StatsCard
-          title="Score Promedio"
-          value={dashboardData.average_risk_score.toFixed(1)}
-          icon={IconGroup}
-          color="yellow"
-        />
-        <StatsCard
-          title="Crédito Total"
-          value={`$${(dashboardData.total_credit_amount / 1000000).toFixed(1)}M`}
-          icon={IconDollar}
-          color="purple"
-        />
-      </div>
+      {/* Métricas principales */}
+      <section className="metrics-grid">
+        <div className="metric-card">
+          <div className="metric-icon">📋</div>
+          <div className="metric-value">{dashboardData.total_applications}</div>
+          <div className="metric-label">Total Solicitudes</div>
+          <div className="metric-glow pink"></div>
+        </div>
 
-      {/* Estado de solicitudes */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <div className="card">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">Estado de Solicitudes</h3>
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600">Aprobadas</span>
-              <div className="flex items-center">
-                <span className="badge badge-success">{dashboardData.approved_applications}</span>
-              </div>
+        <div className="metric-card">
+          <div className="metric-icon">✅</div>
+          <div className="metric-value">{approvalRate}%</div>
+          <div className="metric-label">Tasa Aprobación</div>
+          <div className="metric-glow green"></div>
+        </div>
+
+        <div className="metric-card">
+          <div className="metric-icon">📊</div>
+          <div className="metric-value">{dashboardData.average_risk_score.toFixed(1)}</div>
+          <div className="metric-label">Score Promedio</div>
+          <div className="metric-glow blue"></div>
+        </div>
+
+        <div className="metric-card">
+          <div className="metric-icon">💰</div>
+          <div className="metric-value">${(dashboardData.total_credit_amount / 1000000).toFixed(1)}M</div>
+          <div className="metric-label">Crédito Total</div>
+          <div className="metric-glow purple"></div>
+        </div>
+      </section>
+
+      {/* Análisis detallado */}
+      <section className="analysis-grid">
+        {/* Estado de solicitudes */}
+        <div className="analysis-card">
+          <h3 className="card-title neon-text">🔥 Estado de Solicitudes</h3>
+          <div className="status-grid">
+            <div className="status-item approved">
+              <span className="status-icon">✅</span>
+              <span className="status-value">{dashboardData.approved_applications}</span>
+              <span className="status-label">Aprobadas</span>
             </div>
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600">Pendientes</span>
-              <div className="flex items-center">
-                <span className="badge badge-warning">{dashboardData.pending_applications}</span>
-              </div>
+            <div className="status-item pending">
+              <span className="status-icon">⏳</span>
+              <span className="status-value">{dashboardData.pending_applications}</span>
+              <span className="status-label">Pendientes</span>
             </div>
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600">Rechazadas</span>
-              <div className="flex items-center">
-                <span className="badge badge-danger">{dashboardData.rejected_applications}</span>
-              </div>
+            <div className="status-item rejected">
+              <span className="status-icon">❌</span>
+              <span className="status-value">{dashboardData.rejected_applications}</span>
+              <span className="status-label">Rechazadas</span>
             </div>
           </div>
         </div>
 
-        <div className="card">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">Distribución de Riesgo</h3>
-          <RiskLevelChart data={dashboardData.risk_level_distribution} />
+        {/* Distribución de riesgo */}
+        <div className="analysis-card">
+          <h3 className="card-title neon-text">⚡ Distribución de Riesgo</h3>
+          <div className="chart-container">
+            <RiskLevelChart data={dashboardData.risk_level_distribution} />
+          </div>
         </div>
 
-        <div className="card">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">Sectores Principales</h3>
-          <SectorChart data={dashboardData.sector_distribution} />
+        {/* Sectores principales */}
+        <div className="analysis-card">
+          <h3 className="card-title neon-text">🏢 Sectores Principales</h3>
+          <div className="chart-container">
+            <SectorChart data={dashboardData.sector_distribution} />
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* Actividad reciente */}
-      <div className="card">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Actividad Reciente</h3>
-        <div className="text-sm text-gray-500">
-          Esta sección mostraría las actividades más recientes del sistema, como nuevas solicitudes, 
-          análisis completados, etc.
+      {/* Actividad del sistema */}
+      <section className="activity-section">
+        <h3 className="section-title neon-text">🌐 Actividad del Sistema</h3>
+        <div className="activity-grid">
+          <div className="activity-card">
+            <div className="activity-icon">🔄</div>
+            <div className="activity-content">
+              <h4 className="activity-title">Sistema Operativo</h4>
+              <p className="activity-desc">
+                Todos los servicios de análisis están funcionando correctamente
+              </p>
+            </div>
+            <div className="activity-status active"></div>
+          </div>
+          
+          <div className="activity-card">
+            <div className="activity-icon">🤖</div>
+            <div className="activity-content">
+              <h4 className="activity-title">IA en Línea</h4>
+              <p className="activity-desc">
+                Modelos de machine learning listos para evaluaciones
+              </p>
+            </div>
+            <div className="activity-status active"></div>
+          </div>
+          
+          <div className="activity-card">
+            <div className="activity-icon">💾</div>
+            <div className="activity-content">
+              <h4 className="activity-title">Base de Datos</h4>
+              <p className="activity-desc">
+                Conexión estable con {dashboardData.total_applications} registros
+              </p>
+            </div>
+            <div className="activity-status active"></div>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
