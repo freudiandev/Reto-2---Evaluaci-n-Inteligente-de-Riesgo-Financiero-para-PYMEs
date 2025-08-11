@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+pandas
+numpy
+requests
+aiohttp
+beautifulsoup4
+PyPDF2
+chromadb
+sympy
+python-dotenv
+openpyxl

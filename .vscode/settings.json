@@ -34,5 +34,6 @@
             "driver": "SQLite",
             "database": "./backend/database/pymes_risk.db"
         }
-    ]
+    ],
+    "python-envs.pythonProjects": []
 }

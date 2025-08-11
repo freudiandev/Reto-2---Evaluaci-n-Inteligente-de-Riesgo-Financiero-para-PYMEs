@@ -18,8 +18,8 @@ function App() {
         <header className="hero-section">
           <div className="cyberpunk-grid-bg"></div>
           <h1 className="neon-title">
-            The Orellana's Boyz: Reto Analiza crédito para las Pymes,
-            <span className="subtitle-glow"> más allá del historial crediticio</span>
+            The Orellana's Boyz: 
+            <span className="subtitle-glow"> Proyecto para analizar el riesgo de crédito para Pymes más allá del sesgo del estado crediticio</span>
           </h1>
           <div className="neon-divider"></div>
         </header>
@@ -27,6 +27,7 @@ function App() {
         <main className="content-sections">
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/main-analysis" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/companies" element={<Companies />} />
             <Route path="/applications" element={<Applications />} />
